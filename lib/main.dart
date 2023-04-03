@@ -7,13 +7,13 @@ Map<String, dynamic> entryMap = {
       "entry_id": "1234",
       "title": "Entry1",
       "contents": "that's rough buddy",
-      "timestamp": 09149571894582974984,
+      "timestamp": 09149571,
     },
     <String, dynamic>{
       "entry_id": "1234",
       "title": "Entry2",
       "contents": "hello here's my post",
-      "timestamp": 09149571894582974984,
+      "timestamp": 0914957,
     },
   ],
 };
