@@ -18,7 +18,8 @@ Map<String, dynamic> entryMap = {
   ],
 };
 
-void main() {
+Future<void> main() async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const EntryScreen());
 }
 
