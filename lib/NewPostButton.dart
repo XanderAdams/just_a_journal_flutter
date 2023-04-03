@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 
 class NewPostButton extends StatelessWidget {
  const NewPostButton(
-     this.postID,
+     this.entryID,
      this.title,
-     this.postContents,
+     this.contents,
      {Key? key}
      ) : super(key: key);
- final String postID;
+ final String entryID;
  final String title;
- final String postContents;
+ final String contents;
 
  @override
   Widget build(BuildContext context) {
@@ -24,13 +24,13 @@ class NewPostButton extends StatelessWidget {
            child: Column(
              children: [
                Align(
-                 alignment: Alignment.bottomRight,
+                 alignment: Alignment.topLeft,
                  child: Text(title),
                ),
                const Padding(padding: EdgeInsets.all(10)),
                Align(
                  alignment: Alignment.bottomLeft,
-                 child: Text(postContents),
+                 child: Text(contents),
                ),
              ],
            ),
