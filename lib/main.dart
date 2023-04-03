@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'NewPostButton.dart';
+import 'new_post_button.dart';
 
 Map<String, dynamic> entryMap = {
   "entries" : [
