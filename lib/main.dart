@@ -1,51 +1,53 @@
 import 'package:flutter/material.dart';
-import 'new_post_button.dart';
 
-Map<String, dynamic> entryMap = {
-  "entries" : [
-    <String, dynamic> {
-      "entry_id": "1234",
-      "title": "Entry1",
-      "contents": "that's rough buddy",
-      "timestamp": 09149571,
-    },
-    <String, dynamic>{
-      "entry_id": "1234",
-      "title": "Entry2",
-      "contents": "hello here's my post",
-      "timestamp": 0914957,
-    },
-  ],
-};
+List<Entry> entries = [];
 
-Future<void> main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  runApp(const EntryScreen());
+class Entry {
+  String title;
+  String contents;
+  Color color;
+  List<Tag> tags;
+
+  Entry(this.title, this.contents, this.color, this.tags);
 }
 
-class EntryScreen extends StatelessWidget {
-  const EntryScreen({Key? key}) : super(key: key);
+class JournalPage extends StatefulWidget {
+  const JournalPage({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Entry',
-      home: Scaffold(
-        appBar: AppBar(),
-        body: SingleChildScrollView(
+  State<JournalPage> createState() => _JournalPageState();
+}
+
+class _JournalPageState extends State<JournalPage> {
+  List<Entry> entries = [];
+  @override
+  Widget build(BuildContext context){
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Journal Page'),
+      ),
+      body: Center(
+        child: SingleChildScrollView(
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.start,
-            children: [
-              for(int i = 0; i < ( entryMap['entries'] as List).length; i++)
-                NewPostButton(
-                    ((( entryMap['entries'] as List)[i] as Map<String, dynamic>)['entry_id'] as String),
-                    ((( entryMap['entries'] as List)[i] as Map<String, dynamic>)['title'] as String),
-                    ((( entryMap['entries'] as List)[i] as Map<String, dynamic>)['contents'] as String)
-                ),
-            ],
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+
           ),
         ),
+      ),
+      floatingActionButton: FloatingActionButton(
+          onPressed: () => setState(() {
+            entries.add(Entry(title, contents, color, tags));
+          }),
+          backgroundColor: Colors.blueAccent,
+          child: const Icon(Icons.add)
       ),
     );
   }
 }
+
+class Tag {
+  String name;
+
+  Tag(this.name);
+}
+
