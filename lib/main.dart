@@ -13,11 +13,11 @@ class Entry {
 
 //Initializing the space that entries will go
 List<Entry> entries = [];
-
+// Initializing 3 past entries for the home page
 void main() {
-  entries.add(Entry("here's my title", "heres my theoretically longer string", Colors.blueAccent, 'tag,zoo,dog,cool'));
-  entries.add(Entry("here's my other title", "heres my kind of longer string", Colors.yellowAccent, 'tag,computer,cool'));
-  entries.add(Entry("here's my third title", "heres my theoretically super duper extra long string wordswordswordsword swordsword swordswordswords wordswordsword swords", Colors.redAccent, 'not cool,tag,tag,cool'));
+  entries.add(Entry("Monday journal entry", "Today was a really good day, i spent lots of time outside with my friends. I even got to go to the beach with my family", Colors.blueAccent, 'beach,family,sand,fun'));
+  entries.add(Entry("wacky wednesday", "Today I had to give my dog a bath, he hates baths! I took him to the pet store so i could use the industrial hair dryers. My dog got plenty of treats after his bath", Colors.yellowAccent, 'bath,dog,cleaning'));
+  entries.add(Entry("here's my third title", "This weekend was really tough. I had to do yard work and study all weekend. My dad made me angry because he micromanages everything i do!!", Colors.redAccent, 'not cool,angry,dad,yard work'));
 
   print("Entry: " + entries.length.toString());
 
@@ -125,7 +125,7 @@ class _JournalPageState extends State<JournalPage> {
 
 
 
-              // siezebox default size
+
             ],
           ),
         ),
@@ -153,7 +153,7 @@ class NewEntry extends StatefulWidget {
 }
 
 
-
+//variables for new entries
 class _NewEntryState extends State<NewEntry> {
   late TextEditingController titleText;
   late TextEditingController contentsText;
