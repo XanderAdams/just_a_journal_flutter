@@ -14,9 +14,9 @@ class Entry {
 List<Entry> entries = [];
 
 void main() {
-  entries.add(Entry("here's my title", "heres my theoretically longer string", Colors.blueAccent, 'tag,tag,tag,cool'));
-  entries.add(Entry("here's my other title", "heres my kind of longer string", Colors.yellowAccent, 'tag,tag,cool'));
-  entries.add(Entry("here's my third title", "heres my theoretically super duper extra long string wordswordswordsword swordsword swordswordswords wordswordsword swords", Colors.redAccent, 'tag,tag,tag,cool'));
+  entries.add(Entry("here's my title", "heres my theoretically longer string", Colors.blueAccent, 'tag,zoo,dog,cool'));
+  entries.add(Entry("here's my other title", "heres my kind of longer string", Colors.yellowAccent, 'tag,computer,cool'));
+  entries.add(Entry("here's my third title", "heres my theoretically super duper extra long string wordswordswordsword swordsword swordswordswords wordswordsword swords", Colors.redAccent, 'not cool,tag,tag,cool'));
 
   print("Entry: " + entries.length.toString());
 
@@ -42,7 +42,31 @@ class JournalPage extends StatefulWidget {
 
 
 class _JournalPageState extends State<JournalPage> {
+  late TextEditingController tagText;
+  @override
+  void initState() {
+    super.initState();
+   tagText = TextEditingController(text: '');
 
+  }
+  List<Entry> getMatchingEntries() {
+    List<Entry> temp= [];
+    for(int i=0; i < entries.length; i++){
+      List<String> tags = entries[i].tags.split(',');
+      for(int t=0; t < tags.length; t++) {
+        if(tags[t] == tagText.text){
+          temp.add(entries[i]);
+          break;
+        }
+      }
+    }
+
+
+    if(tagText.text =='')
+    return entries;
+    else
+      return temp;
+  }
   @override
   Widget build(BuildContext context){
     return Scaffold(
@@ -53,13 +77,28 @@ class _JournalPageState extends State<JournalPage> {
         child: SingleChildScrollView(
           child: Column(
             children: <Widget> [
-              for(int i = 0; i < entries.length; i++)
+              SizedBox(
+                width: 300, //double.infinity
+                child: TextField(
+                    keyboardType: TextInputType.number,
+                    controller: tagText,
+                    onChanged:(String? value) {
+                      if (value != null) {
+                        setState(() {
+
+                      });
+                      }
+                    }
+                ),
+              ),
+              Padding(padding: EdgeInsets.all(10)),
+              for(int i = 0; i < getMatchingEntries().length; i++)
                 Column(
                   children: [
                     Container(
                       padding: const EdgeInsets.only(left: 10, top: 5, bottom: 5, right: 10),
                       decoration: BoxDecoration(
-                        color: entries[i].color,
+                        color: getMatchingEntries()[i].color,
                         border: Border.all(
                           color: Colors.black,
                           width: 2,
@@ -69,10 +108,10 @@ class _JournalPageState extends State<JournalPage> {
                       width: 300,
                       child: Column(
                         children: [
-                          Text(entries[i].title),
+                          Text(getMatchingEntries()[i].title),
                           Padding(padding: EdgeInsets.all(3)),
-                          Text(entries[i].contents),
-                          Text(entries[i].tags),
+                          Text(getMatchingEntries()[i].contents),
+                          Text(getMatchingEntries()[i].tags),
                         ],
                       ),
                     ),
