@@ -21,15 +21,15 @@ void main() {
   print("Entry: " + entries.length.toString());
 
   runApp(
-   MaterialApp(
-     title: '',
-     initialRoute: '/',
-     routes: {
-       '/': (context) => const JournalPage(),
-       '/new_entry': (context) => const NewEntry(),
-     },
-   )
- );
+      MaterialApp(
+        title: '',
+        initialRoute: '/',
+        routes: {
+          '/': (context) => const JournalPage(),
+          '/new_entry': (context) => const NewEntry(),
+        },
+      )
+  );
 }
 
 class JournalPage extends StatefulWidget {
@@ -42,7 +42,7 @@ class JournalPage extends StatefulWidget {
 
 
 class _JournalPageState extends State<JournalPage> {
-  List<Entry> entries = [];
+
   @override
   Widget build(BuildContext context){
     return Scaffold(
@@ -52,7 +52,7 @@ class _JournalPageState extends State<JournalPage> {
       body: Center(
         child: SingleChildScrollView(
           child: Column(
-            children: [
+            children: <Widget> [
               for(int i = 0; i < entries.length; i++)
                 Text("HI" + i.toString())
               // siezebox default size
@@ -113,4 +113,3 @@ class Tag {
 
   Tag(this.name);
 }
-
