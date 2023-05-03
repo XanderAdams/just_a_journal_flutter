@@ -87,7 +87,7 @@ class _NewEntryState extends State<NewEntry> {
   Widget build(BuildContext context){
     return Scaffold(
       appBar: AppBar(
-        title: const Text('E Page'),
+        title: const Text('Entry Page'),
       ),
       body: Center(
         child: SingleChildScrollView(
