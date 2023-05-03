@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-
+import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
 
 class Entry {
@@ -110,6 +110,19 @@ class NewEntry extends StatefulWidget {
 
 
 class _NewEntryState extends State<NewEntry> {
+  late TextEditingController titleText;
+  late TextEditingController contentsText;
+  late TextEditingController tagText;
+  Color currentColor = Colors.deepPurpleAccent;
+
+  @override
+  void initState() {
+    super.initState();
+    titleText = TextEditingController(text: '');
+    contentsText = TextEditingController(text: '');
+    tagText = TextEditingController(text: '');
+  }
+
   @override
   Widget build(BuildContext context){
     return Scaffold(
@@ -120,13 +133,80 @@ class _NewEntryState extends State<NewEntry> {
         child: SingleChildScrollView(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              const Padding(padding: EdgeInsets.all(20)),
+              SizedBox(
+                width: 300, //double.infinity
+                child: TextField(
+                    keyboardType: TextInputType.number,
+                    controller: titleText,
+                    onChanged:(String? value) {
+                      if (value != null) {
+                        /*setState(() {
+                        updateOutput();
+                      });*/
+                      }
+                    }
+                ),
+              ),
+              const Padding(padding: EdgeInsets.all(20)),
+              SizedBox(
+                width: 300, //double.infinity
+                child: TextField(
+                    keyboardType: TextInputType.number,
+                    controller: contentsText,
+                    onChanged:(String? value) {
+                      if (value != null) {
+                        /*setState(() {
+                        updateOutput();
+                      });*/
+                      }
+                    }
+                ),
+              ),
+              const Padding(padding: EdgeInsets.all(20)),
+              SizedBox(
+                width: 300, //double.infinity
+                child: TextField(
+                    keyboardType: TextInputType.number,
+                    controller: tagText,
+                    onChanged:(String? value) {
+                      if (value != null) {
+                        /*setState(() {
+                        updateOutput();
+                      });*/
+                      }
+                    }
+                ),
+              ),
+              const Padding(padding: EdgeInsets.all(30)),
+              Container(
+                width: 300,
+                height: 300,
+                child: Expanded(
+                  child: BlockPicker(
+                    pickerColor: currentColor,
+                      onColorChanged: (color){
+                      setState(() {
+                        currentColor = color;
+                      });
+                      },
+                  ),
+                ),
+              )
+            ],
 
           ),
         ),
       ),
       floatingActionButton: FloatingActionButton(
           onPressed: () => setState(() {
-            //entries.add(Entry(title, contents, color, tags));
+            if (titleText.text == '') {return;}
+            if (contentsText.text == '') {return;}
+            if (tagText.text == '') {return;}
+            entries.add(Entry(titleText.text, contentsText.text, currentColor, tagText.text));
+
+            Navigator.push(context, new MaterialPageRoute(builder: (context) => new JournalPage()));
           }),
           backgroundColor: Colors.blueAccent,
           child: const Icon(Icons.add)
