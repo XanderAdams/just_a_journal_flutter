@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_colorpicker/flutter_colorpicker.dart';
 
-
+// a class for containing everything an entry needs
 class Entry {
   String title;
   String contents;
@@ -11,6 +11,7 @@ class Entry {
   Entry(this.title, this.contents, this.color, this.tags);
 }
 
+//Initializing the space that entries will go
 List<Entry> entries = [];
 
 void main() {
@@ -32,6 +33,7 @@ void main() {
   );
 }
 
+//the primary page of the app that displays all previous entries and has a button for creating a new entry
 class JournalPage extends StatefulWidget {
   const JournalPage({super.key});
 
@@ -49,6 +51,7 @@ class _JournalPageState extends State<JournalPage> {
    tagText = TextEditingController(text: '');
 
   }
+  //A function to search entries based on a singular tag
   List<Entry> getMatchingEntries() {
     List<Entry> temp= [];
     for(int i=0; i < entries.length; i++){
@@ -127,6 +130,8 @@ class _JournalPageState extends State<JournalPage> {
           ),
         ),
       ),
+
+      // the button that creates a new entry (kinda)
       floatingActionButton: FloatingActionButton(
           onPressed: () {
             Navigator.pushNamed(context, '/new_entry');
@@ -139,6 +144,7 @@ class _JournalPageState extends State<JournalPage> {
   }
 }
 
+//how a new entry is made
 class NewEntry extends StatefulWidget {
   const NewEntry({super.key});
 
@@ -238,6 +244,7 @@ class _NewEntryState extends State<NewEntry> {
           ),
         ),
       ),
+      // the button that adds the new entry to the list of entries
       floatingActionButton: FloatingActionButton(
           onPressed: () => setState(() {
             if (titleText.text == '') {return;}
@@ -254,6 +261,7 @@ class _NewEntryState extends State<NewEntry> {
   }
 }
 
+// An unused class that was going to be used for the tag based search method
 class Tag {
   String name;
 
