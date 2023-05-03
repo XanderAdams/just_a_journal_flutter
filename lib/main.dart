@@ -16,7 +16,7 @@ List<Entry> entries = [];
 void main() {
   entries.add(Entry("here's my title", "heres my theoretically longer string", Colors.blueAccent, 'tag,tag,tag,cool'));
   entries.add(Entry("here's my other title", "heres my kind of longer string", Colors.yellowAccent, 'tag,tag,cool'));
-  entries.add(Entry("here's my third title", "heres my theoretically super duper extra long string", Colors.redAccent, 'tag,tag,tag,cool'));
+  entries.add(Entry("here's my third title", "heres my theoretically super duper extra long string wordswordswordsword swordsword swordswordswords wordswordsword swords", Colors.redAccent, 'tag,tag,tag,cool'));
 
   print("Entry: " + entries.length.toString());
 
@@ -54,7 +54,35 @@ class _JournalPageState extends State<JournalPage> {
           child: Column(
             children: <Widget> [
               for(int i = 0; i < entries.length; i++)
-                Text("HI" + i.toString())
+                Column(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.only(left: 10, top: 5, bottom: 5, right: 10),
+                      decoration: BoxDecoration(
+                        color: entries[i].color,
+                        border: Border.all(
+                          color: Colors.black,
+                          width: 2,
+                        ),
+                        borderRadius: BorderRadius.circular(10)
+                      ),
+                      width: 300,
+                      child: Column(
+                        children: [
+                          Text(entries[i].title),
+                          Padding(padding: EdgeInsets.all(3)),
+                          Text(entries[i].contents),
+                          Text(entries[i].tags),
+                        ],
+                      ),
+                    ),
+                    const Padding(padding: EdgeInsets.all(10))
+                  ],
+                )
+
+
+
+
               // siezebox default size
             ],
           ),
@@ -82,7 +110,6 @@ class NewEntry extends StatefulWidget {
 
 
 class _NewEntryState extends State<NewEntry> {
-  List<Entry> entries = [];
   @override
   Widget build(BuildContext context){
     return Scaffold(
